@@ -11,28 +11,40 @@ function showScene(n) {
 }
 
 /* ============================
-   MUSIC — autoplay mute → unmute
+   MUSIC — autoplay + unlock on first click
 ============================ */
 
 function startMusic() {
   const player = document.getElementById("ytplayer");
 
+  // Start muted (allowed by browsers)
   player.src =
     "https://www.youtube.com/embed/yKNxeF4KMsY?autoplay=1&mute=1&loop=1&playlist=yKNxeF4KMsY&enablejsapi=1";
-
-  setTimeout(() => {
-    player.contentWindow.postMessage(
-      JSON.stringify({
-        event: "command",
-        func: "unMute",
-        args: []
-      }),
-      "*"
-    );
-  }, 500);
 }
 
 startMusic();
+
+// Unlock audio on FIRST user interaction
+let audioUnlocked = false;
+
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+
+  const player = document.getElementById("ytplayer");
+
+  player.contentWindow.postMessage(
+    JSON.stringify({
+      event: "command",
+      func: "unMute",
+      args: []
+    }),
+    "*"
+  );
+}
+
+document.addEventListener("click", unlockAudio);
+document.addEventListener("keydown", unlockAudio);
 
 /* ============================
    HEARTS + SPARKLES (PASTEL)
