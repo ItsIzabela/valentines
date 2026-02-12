@@ -35,19 +35,19 @@ function startMusic() {
 startMusic();
 
 /* ============================
-   HEARTS + SPARKLES (GLOBAL)
+   HEARTS + SPARKLES (PASTEL)
 ============================ */
 
 function createHeart() {
   const heart = document.createElement("div");
   heart.classList.add("heart");
-  const size = 10 + Math.random() * 25;
+  const size = 15 + Math.random() * 20;
   heart.style.width = heart.style.height = size + "px";
   heart.style.left = Math.random() * window.innerWidth + "px";
   heart.style.top = "-40px";
   heart.style.transform = `rotate(${Math.random() * 360}deg)`;
 
-  const duration = 4000 + Math.random() * 4000;
+  const duration = 5000 + Math.random() * 4000;
   const start = Date.now();
 
   function animate() {
@@ -63,23 +63,23 @@ function createHeart() {
   document.body.appendChild(heart);
 }
 
-setInterval(createHeart, 180);
+setInterval(createHeart, 200);
 
 function createSparkle() {
   const sparkle = document.createElement("div");
   sparkle.classList.add("sparkle");
-  const size = 2 + Math.random() * 5;
+  const size = 3 + Math.random() * 5;
   sparkle.style.width = sparkle.style.height = size + "px";
   sparkle.style.left = Math.random() * window.innerWidth + "px";
   sparkle.style.top = Math.random() * window.innerHeight + "px";
 
-  const duration = 800 + Math.random() * 800;
+  const duration = 900 + Math.random() * 900;
   const start = Date.now();
 
   function animate() {
     const t = Date.now() - start;
     const p = t / duration;
-    sparkle.style.transform = `translateY(${p * -30}px) translateX(${Math.sin(p * 10) * 6}px) scale(${1 - p})`;
+    sparkle.style.transform = `translateY(${p * -40}px) translateX(${Math.sin(p * 10) * 8}px) scale(${1 - p})`;
     sparkle.style.opacity = 1 - p;
     if (p < 1) requestAnimationFrame(animate);
     else sparkle.remove();
@@ -89,7 +89,7 @@ function createSparkle() {
   document.body.appendChild(sparkle);
 }
 
-setInterval(createSparkle, 50);
+setInterval(createSparkle, 60);
 
 /* ============================
    SCENE 1 — BUTTON LOGIC
@@ -128,7 +128,8 @@ document.getElementById("scene2").addEventListener("click", (e) => {
   love.style.left = e.clientX + "px";
   love.style.top = e.clientY + "px";
   love.style.color = "#ff2f92";
-  love.style.fontSize = "20px";
+  love.style.fontSize = "22px";
+  love.style.textShadow = "0 0 15px #fff, 0 0 25px #ffb3e6";
   love.style.pointerEvents = "none";
   document.body.appendChild(love);
 
