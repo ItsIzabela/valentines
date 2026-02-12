@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Valentine ❤️</title>
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  background:black;
+  font-family:'Comic Sans MS',cursive;
+}
+
+/* START SCREEN */
+#startScreen{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,#1a0015,#000);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  color:white;
+  text-align:center;
+  cursor:pointer;
+  transition:1s;
+}
+
+/* TEXT */
+.middle-text{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  color:white;
+  font-size:56px;
+  text-align:center;
+  text-shadow:0 0 20px white,0 0 40px #ff4da6;
+  opacity:0;
+  transition:1s;
+  z-index:10;
+}
+.middle-text.show{opacity:1;}
+
+.top-text{
+  position:absolute;
+  top:40px;
+  width:100%;
+  text-align:center;
+  font-size:42px;
+  color:white;
+  text-shadow:0 0 25px #ff4da6;
+  opacity:0;
+  transition:1s;
+  z-index:10;
+}
+.top-text.show{opacity:1;}
+
+.fade{
+  animation:fade 1.2s ease;
+}
+@keyframes fade{
+  from{opacity:0; transform:scale(1.05);}
+  to{opacity:1; transform:scale(1);}
+}
+
+/* GIF */
+iframe.gif{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border:none;
+  display:none;
+  z-index:0;
+}
+
+/* FINAL */
+#final{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(.6);
+  opacity:0;
+  text-align:center;
+  z-index:20;
+  transition:1.5s;
+}
+#final.show{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+}
+#final img{
+  max-width:340px;
+  border-radius:25px;
+  box-shadow:0 0 60px #ff4da6;
+}
+#final h1{
+  color:white;
+  font-size:60px;
+  margin-bottom:20px;
+  text-shadow:0 0 25px #ff4da6;
+}
+
+/* HEART */
+.heart{
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:#ff2d75;
+  clip-path:polygon(50% 90%,62% 78%,75% 65%,88% 48%,90% 32%,80% 18%,65% 12%,50% 18%,35% 12%,20% 18%,10% 32%,12% 48%,25% 65%,38% 78%);
+}
+
+/* PETALS */
+.petal{
+  position:absolute;
+  width:18px;
+  height:18px;
+  background:#ff6fae;
+  border-radius:50% 50% 50% 0;
+  opacity:.85;
+}
+</style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="startScreen">
+  <h1 style="font-size:70px;margin:0;">💝</h1>
+  <div style="font-size:42px;margin-top:20px;">Tap to start<br>love magic ✨</div>
+  <div style="margin-top:25px;font-size:20px;">turn sound on 🎵</div>
+</div>
+
+<!-- YOUTUBE MUSIC -->
+<iframe
+  id="ytplayer"
+  width="0"
+  height="0"
+  allow="autoplay; encrypted-media"
+  src="">
+</iframe>
+
+<!-- GIF -->
+<iframe id="gif" class="gif"></iframe>
+
+<div class="top-text" id="top"></div>
+<div class="middle-text" id="text"></div>
+
+<!-- FINAL -->
+<div id="final">
+  <h1>Us ❤️</h1>
+  <img src="your-image.jpg">
+</div>
+
+<script>
+const slides=[
+  {type:"text",t:`Wait a second my love… 😌💗`},
+
+  {type:"gif",src:"gifs/gif1.html",top:"Flowers for the prettiest boy alive 🌹"},
+
+  {type:"text",t:`I just want you to know...
+
+how deeply I adore you.
+You make my world softer,
+my heart calmer,
+and every day brighter
+just by being in it 💞`},
+
+  {type:"text",t:`You shine like the brightest star
+in the darkest night ✨`},
+
+  {type:"gif",src:"gifs/gif3.html",mid:"Our hearts together ❤️"},
+
+  {type:"text",t:`You are my safe place,
+my happiness,
+my favorite person,
+my dream come true.
+
+Loving you
+is the easiest
+and most beautiful thing
+I've ever done 💖`},
+
+  {type:"gif",src:"gifs/gif2.html",top:"More flowers for my baby 🌸"},
+
+  {type:"final"}
+];
+
+let i=0;
+const gif=document.getElementById("gif");
+const text=document.getElementById("text");
+const topT=document.getElementById("top");
+const final=document.getElementById("final");
+
+/* TYPE EFFECT */
+function typeWriter(str,cb){
+  text.innerHTML="";
+  text.classList.add("show");
+  let n=0;
+  let inter=setInterval(()=>{
+    text.innerHTML+=str[n];
+    n++;
+    if(n>=str.length){
+      clearInterval(inter);
+      setTimeout(cb,3500);
+    }
+  },40);
+}
+
+/* SHOW SLIDES */
+function show(){
+  let s=slides[i];
+
+  if(s.type==="text"){
+    gif.style.display="none";
+    topT.classList.remove("show");
+    typeWriter(s.t,next);
+  }
+
+  else if(s.type==="gif"){
+    text.classList.remove("show");
+    gif.classList.remove("fade");
+    void gif.offsetWidth;
+
+    gif.src="about:blank";
+    setTimeout(()=>gif.src=s.src,50);
+
+    gif.style.display="block";
+    gif.classList.add("fade");
+
+    if(s.top){
+      topT.innerText=s.top;
+      topT.classList.add("show");
+    } else topT.classList.remove("show");
+
+    if(s.mid){
+      text.innerText=s.mid;
+      text.classList.add("show");
+    }
+
+    setTimeout(next,8000);
+  }
+
+  else{
+    gif.style.display="none";
+    text.classList.remove("show");
+    topT.classList.remove("show");
+
+    setTimeout(()=>{
+      document.body.style.transition="2s";
+      document.body.style.background="#000";
+      final.classList.add("show");
+    },800);
+
+    loveExplosion();
+    return;
+  }
+}
+
+function next(){ i++; if(i<slides.length) show(); }
+
+/* START */
+startScreen.onclick=()=>{
+  const player=document.getElementById("ytplayer");
+
+  // Start muted autoplay (required)
+  player.src =
+    "https://www.youtube.com/embed/yKNxeF4KMsY?autoplay=1&mute=1&loop=1&playlist=yKNxeF4KMsY&enablejsapi=1";
+
+  // Unmute after load
+  setTimeout(() => {
+    player.contentWindow.postMessage(
+      JSON.stringify({
+        event: "command",
+        func: "unMute",
+        args: []
+      }),
+      "*"
+    );
+  }, 1500);
+
+  startScreen.style.opacity=0;
+  setTimeout(()=>startScreen.remove(),900);
+  show();
+};
+
+/* HEARTS */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*innerWidth+"px";
+  h.style.top="-20px";
+  let d=4000+Math.random()*4000;
+  let s=Date.now();
+  (function a(){
+    let p=(Date.now()-s)/d;
+    h.style.top=p*innerHeight+"px";
+    h.style.opacity=1-p;
+    if(p<1)requestAnimationFrame(a);
+    else h.remove();
+  })();
+  document.body.appendChild(h);
+},150);
+
+/* PETALS */
+setInterval(()=>{
+  let p=document.createElement("div");
+  p.className="petal";
+  p.style.left=Math.random()*innerWidth+"px";
+  p.style.top="-20px";
+  let d=5000+Math.random()*4000;
+  let s=Date.now();
+  (function a(){
+    let t=(Date.now()-s)/d;
+    p.style.top=t*innerHeight+"px";
+    p.style.left=(parseFloat(p.style.left)+Math.sin(t*10))+"px";
+    p.style.opacity=1-t;
+    if(t<1)requestAnimationFrame(a);
+    else p.remove();
+  })();
+  document.body.appendChild(p);
+},300);
+
+/* EXPLOSION */
+function loveExplosion(){
+  for(let k=0;k<120;k++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.style.left=innerWidth/2+"px";
+    h.style.top=innerHeight/2+"px";
+    let angle=Math.random()*Math.PI*2;
+    let dist=200+Math.random()*300;
+    let x=Math.cos(angle)*dist;
+    let y=Math.sin(angle)*dist;
+    h.animate([
+      {transform:"translate(0,0)",opacity:1},
+      {transform:`translate(${x}px,${y}px)`,opacity:0}
+    ],{duration:2000,easing:"ease-out"});
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2000);
+  }
+}
+</script>
+</body>
+</html>

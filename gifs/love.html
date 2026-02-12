@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I Love You 💕</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #ffdee0, #ff6f91);
+      font-family: 'Comic Sans MS', cursive;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 60px;
+      color: #fff;
+      text-shadow: 2px 2px 12px #ff7faa, 0 0 25px #fff;
+      margin: 0;
+    }
+
+    p {
+      font-size: 28px;
+      color: #fff;
+      text-shadow: 2px 2px 8px #ff7faa;
+      margin-top: 20px;
+    }
+
+    .heart {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: rgba(255, 0, 0, 0.8);
+      clip-path: polygon(
+        50% 90%, 62% 78%, 75% 65%, 88% 48%, 90% 32%, 80% 18%,
+        65% 12%, 50% 18%, 35% 12%, 20% 18%, 10% 32%, 12% 48%,
+        25% 65%, 38% 78%
+      );
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, #fff 0%, #fff 70%);
+      border-radius: 50%;
+      opacity: 0.8;
+      z-index: 3;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<h1>I knew it 😌💖</h1>
+<p>click around 💕</p>
+
+<script>
+let clicks = 0;
+const MAX_CLICKS = 13;
+
+/* ===== Floating Hearts ===== */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  const size = 10 + Math.random() * 20;
+  heart.style.width = heart.style.height = size + "px";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.top = "-30px";
+  heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+  const duration = 4000 + Math.random() * 4000;
+  const start = Date.now();
+
+  function animate() {
+    const time = Date.now() - start;
+    const progress = time / duration;
+    heart.style.top = progress * window.innerHeight + "px";
+    heart.style.opacity = 1 - progress;
+    if (progress < 1) requestAnimationFrame(animate);
+    else heart.remove();
+  }
+  animate();
+  document.body.appendChild(heart);
+}
+setInterval(createHeart, 100);
+
+/* ===== Sparkles ===== */
+function createSparkle() {
+  const sparkle = document.createElement("div");
+  sparkle.classList.add("sparkle");
+  const size = 2 + Math.random() * 4;
+  sparkle.style.width = sparkle.style.height = size + "px";
+  sparkle.style.left = Math.random() * window.innerWidth + "px";
+  sparkle.style.top = Math.random() * window.innerHeight + "px";
+  const duration = 800 + Math.random() * 800;
+  const start = Date.now();
+
+  function animate() {
+    const time = Date.now() - start;
+    const progress = time / duration;
+    sparkle.style.transform = `translateY(${progress*-30}px) translateX(${Math.sin(progress*10)*6}px) scale(${1-progress})`;
+    sparkle.style.opacity = 1 - progress;
+    if (progress < 1) requestAnimationFrame(animate);
+    else sparkle.remove();
+  }
+  animate();
+  document.body.appendChild(sparkle);
+}
+setInterval(createSparkle, 30);
+
+/* ===== Click "I LOVE YOU" ===== */
+document.body.addEventListener("click", (e) => {
+  clicks++;
+
+  const love = document.createElement("div");
+  love.innerText = "I LOVE YOU 💕";
+  love.style.position = "absolute";
+  love.style.left = e.clientX + "px";
+  love.style.top = e.clientY + "px";
+  love.style.color = "#ff2f92";
+  love.style.fontSize = "20px";
+  love.style.pointerEvents = "none";
+  document.body.appendChild(love);
+
+  setTimeout(() => love.remove(), 2000);
+
+  if (clicks >= MAX_CLICKS) {
+    setTimeout(() => {
+      window.location.href = "gif-final.html";
+    }, 800);
+  }
+});
+</script>
+
+</body>
+</html>
