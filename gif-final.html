@@ -132,10 +132,14 @@ iframe.gif{
   <div style="margin-top:25px;font-size:20px;">turn sound on 🎵</div>
 </div>
 
-<!-- LOCAL MUSIC -->
-<audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+<!-- YOUTUBE MUSIC -->
+<iframe
+  id="ytplayer"
+  width="0"
+  height="0"
+  allow="autoplay; encrypted-media"
+  src="">
+</iframe>
 
 <!-- GIF -->
 <iframe id="gif" class="gif"></iframe>
@@ -258,8 +262,23 @@ function next(){ i++; if(i<slides.length) show(); }
 
 /* START */
 startScreen.onclick=()=>{
-  const music=document.getElementById("music");
-  music.play().catch(()=>{});
+  const player=document.getElementById("ytplayer");
+
+  // Start muted autoplay (required)
+  player.src =
+    "https://www.youtube.com/embed/yKNxeF4KMsY?autoplay=1&mute=1&loop=1&playlist=yKNxeF4KMsY&enablejsapi=1";
+
+  // Unmute after load
+  setTimeout(() => {
+    player.contentWindow.postMessage(
+      JSON.stringify({
+        event: "command",
+        func: "unMute",
+        args: []
+      }),
+      "*"
+    );
+  }, 1500);
 
   startScreen.style.opacity=0;
   setTimeout(()=>startScreen.remove(),900);
