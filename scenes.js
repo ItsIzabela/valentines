@@ -159,7 +159,7 @@ just by being in it 💞` },
   { type: "text", t: `You shine like the brightest star
 in the darkest night ✨` },
 
-  { type: "gif", src: "gifs/gif3.html", mid: "Our hearts together ❤️" },
+  { type: "gif", src: "gifs/gif3.html", mid: "Our heart together ❤️" },
 
   { type: "text", t: `You are my safe place,
 my happiness,
