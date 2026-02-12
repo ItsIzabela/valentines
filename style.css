@@ -213,3 +213,110 @@ iframe.gif {
   color: white !important;
   text-shadow: 0 0 20px #fff, 0 0 40px #ff4da6;
 }
+
+/* ============================
+   BUTTERFLIES — REAL BUTTERFLY SHAPE
+============================ */
+
+.butterfly {
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  animation: fly 6s ease-in-out forwards;
+  opacity: 0.9;
+}
+
+.butterfly::before,
+.butterfly::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 24px;
+  background: radial-gradient(circle, #fff 0%, #ffd6f7 70%);
+  border-radius: 60% 80% 60% 80%;
+  filter: drop-shadow(0 0 6px #ffd6f7);
+}
+
+.butterfly::before {
+  left: 0;
+  transform-origin: right center;
+  animation: wing 0.6s ease-in-out infinite;
+}
+
+.butterfly::after {
+  right: 0;
+  transform-origin: left center;
+  animation: wing 0.6s ease-in-out infinite reverse;
+}
+
+@keyframes wing {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(60deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+@keyframes fly {
+  0% { transform: translateY(0) translateX(0); opacity: 1; }
+  100% { transform: translateY(-200px) translateX(60px); opacity: 0; }
+}
+
+
+/* ============================
+   CURSOR TRAIL
+============================ */
+
+.cursor-dot {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, white, #ffd6eb);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 6px #ffd6eb);
+  animation: fadeDot 0.6s forwards;
+}
+
+@keyframes fadeDot {
+  to { opacity: 0; transform: scale(0.4); }
+}
+
+.sweet-bubble {
+  background: rgba(255, 230, 245, 0.9);
+  padding: 6px 12px;
+  border-radius: 14px;
+  color: #ff2f92;
+  font-weight: bold;
+  font-size: 18px;
+  text-shadow: none;
+  box-shadow: 0 0 10px #ffd6eb;
+  animation: popIn 0.2s ease-out;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.hug-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
+  background: rgba(255, 220, 240, 0.95);
+  padding: 30px 40px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 28px;
+  color: #ff2f92;
+  box-shadow: 0 0 25px #ffb3e6;
+  animation: hugPop 0.4s ease-out forwards;
+  z-index: 99999;
+}
+
+@keyframes hugPop {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+

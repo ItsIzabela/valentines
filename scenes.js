@@ -101,6 +101,7 @@ const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
 
 yesBtn.addEventListener("click", () => {
+  confetti();
   showScene(2);
 });
 
@@ -121,7 +122,7 @@ const MAX_LOVE = 13;
 
 document.getElementById("scene2").addEventListener("click", (e) => {
   if (currentScene !== 2) return;
-  if (loveClicks >= MAX_LOVE) return; // FIX: no extra emoticons
+  if (loveClicks >= MAX_LOVE) return;
 
   loveClicks++;
 
@@ -190,7 +191,7 @@ const final = document.getElementById("final");
 function typeWriter(str, cb) {
   text.innerHTML = "";
   text.classList.add("show");
-  text.style.textAlign = "center"; // FIX: center text
+  text.style.textAlign = "center";
   let n = 0;
 
   let inter = setInterval(() => {
@@ -236,7 +237,7 @@ function showSlide() {
     if (s.mid) {
       text.innerText = s.mid;
       text.classList.add("show");
-      text.style.textAlign = "center"; // FIX
+      text.style.textAlign = "center";
     }
 
     setTimeout(nextSlide, 8000);
@@ -290,3 +291,157 @@ document.getElementById("startScreen").onclick = () => {
   setTimeout(() => document.getElementById("startScreen").remove(), 900);
   showSlide();
 };
+
+/* ============================
+   BUTTERFLIES
+============================ */
+
+function spawnButterfly() {
+  const b = document.createElement("div");
+  b.className = "butterfly";
+
+  const startX = Math.random() * window.innerWidth;
+  const startY = window.innerHeight + 30;
+
+  b.style.left = startX + "px";
+  b.style.top = startY + "px";
+
+  document.body.appendChild(b);
+
+  setTimeout(() => b.remove(), 6000);
+}
+
+setInterval(spawnButterfly, 1800); // wolniejsze i ładniejsze
+
+
+/* ============================
+   CURSOR TRAIL
+============================ */
+
+document.addEventListener("mousemove", (e) => {
+  const dot = document.createElement("div");
+  dot.className = "cursor-dot";
+  dot.style.left = e.clientX + "px";
+  dot.style.top = e.clientY + "px";
+  document.body.appendChild(dot);
+  setTimeout(() => dot.remove(), 600);
+});
+
+/* ============================
+   SWEET MESSAGES — Scene 1
+============================ */
+
+const sweetMessages = [
+  "you're adorable 💗",
+  "cutest human alive ✨",
+  "my favorite person 💞",
+  "you make everything better 🌸",
+  "i adore you so much 💕"
+];
+
+document.getElementById("scene1").addEventListener("click", (e) => {
+  const msg = document.createElement("div");
+  msg.className = "sweet-bubble";
+  msg.innerText = sweetMessages[Math.floor(Math.random() * sweetMessages.length)];
+  msg.style.position = "absolute";
+  msg.style.left = e.clientX + "px";
+  msg.style.top = e.clientY + "px";
+  msg.style.pointerEvents = "none";
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 1500);
+});
+
+
+/* ============================
+   FORTUNE MESSAGES — Scene 2
+============================ */
+
+const fortunes = [
+  "your smile is magic ✨",
+  "today will be soft and lovely 💗",
+  "you are loved more than you know 💞",
+  "good things are coming 🌸",
+  "you make the world brighter 💖"
+];
+
+document.getElementById("scene2").addEventListener("click", (e) => {
+  if (Math.random() < 0.25) {
+    const f = document.createElement("div");
+    f.innerText = fortunes[Math.floor(Math.random() * fortunes.length)];
+    f.style.position = "absolute";
+    f.style.left = e.clientX + "px";
+    f.style.top = e.clientY + "px";
+    f.style.color = "white";
+    f.style.fontSize = "18px";
+    f.style.textShadow = "0 0 10px #fff, 0 0 20px #ffb3e6";
+    f.style.pointerEvents = "none";
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 2000);
+  }
+});
+
+/* ============================
+   SUPER LOVE MODE
+============================ */
+
+let clickTimes = [];
+
+document.addEventListener("click", () => {
+  const now = Date.now();
+  clickTimes.push(now);
+  clickTimes = clickTimes.filter(t => now - t < 400);
+
+  if (clickTimes.length >= 3) {
+    for (let i = 0; i < 40; i++) {
+      setTimeout(() => createHeart(), i * 40);
+    }
+  }
+});
+
+/* ============================
+   HUG BUTTON
+============================ */
+
+setTimeout(() => {
+  const hug = document.getElementById("hug");
+  if (hug) hug.style.display = "block";
+}, 5000);
+
+document.getElementById("hug").addEventListener("click", () => {
+  const pop = document.createElement("div");
+  pop.className = "hug-popup";
+  pop.innerText = "sending hug… 🤗💞";
+  document.body.appendChild(pop);
+
+  setTimeout(() => {
+    pop.innerText = "hug delivered 💗";
+  }, 900);
+
+  setTimeout(() => pop.remove(), 2000);
+});
+
+/* ============================
+   CONFETTI — Scene 1
+============================ */
+
+function confetti() {
+  for (let i = 0; i < 40; i++) {
+    const c = document.createElement("div");
+    c.className = "sparkle";
+    c.style.left = window.innerWidth / 2 + "px";
+    c.style.top = window.innerHeight / 2 + "px";
+    document.body.appendChild(c);
+
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 150 + Math.random() * 150;
+    const x = Math.cos(angle) * dist;
+    const y = Math.sin(angle) * dist;
+
+    c.animate([
+      { transform: "translate(0,0)", opacity: 1 },
+      { transform: `translate(${x}px,${y}px)`, opacity: 0 }
+    ], { duration: 1200 });
+
+    setTimeout(() => c.remove(), 1200);
+  }
+}
