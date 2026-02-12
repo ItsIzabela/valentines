@@ -140,12 +140,84 @@ document.getElementById("scene2").addEventListener("click", (e) => {
   setTimeout(() => love.remove(), 2000);
 
   if (loveClicks >= MAX_LOVE) {
-    setTimeout(() => showScene(3), 800);
+    setTimeout(() => startComplimentScene(), 800);
   }
 });
 
 /* ============================
-   SCENE 3 — GIF SLIDESHOW
+   NEW SCENE 3 — COMPLIMENT WALL
+============================ */
+
+const complimentList = [
+  "you're adorable 💗",
+  "cutest human alive ✨",
+  "my favorite person 💞",
+  "you make everything better 🌸",
+  "i adore you so much 💕",
+  "you brighten every room 💖",
+  "you’re magic to me ✨",
+  "you make life sweeter 🍓",
+  "you’re my soft place 💗",
+  "you’re unbelievably precious 🌸",
+  "you make my heart warm 💞",
+  "you’re the cutest ever 💕",
+  "you’re my favorite human 💗",
+  "you’re sunshine in human form ☀️",
+  "you’re so lovable 💖",
+  "you’re perfect to me ✨",
+  "you’re my comfort person 💞",
+  "you’re so special 💗",
+  "you’re a dream come true 🌸",
+  "you’re my happiness 💕",
+  "you’re the sweetest soul 💖",
+  "you’re everything to me ✨",
+  "you’re my heart’s favorite 💞",
+  "you’re unbelievably cute 💗",
+  "you’re my whole world 🌸",
+  "you’re love itself 💕",
+  "you’re my safe place 💖",
+  "you’re the best thing ever ✨",
+  "you’re my forever favorite 💞"
+];
+
+let complimentIndex = 0;
+
+function startComplimentScene() {
+  showScene(3);
+
+  const container = document.getElementById("complimentContainer");
+  const nextBtn = document.getElementById("nextToSlideshow");
+
+  const interval = setInterval(() => {
+    const bubble = document.createElement("div");
+    bubble.className = "compliment-bubble";
+
+    // losowe rozmieszczenie po całym ekranie
+    bubble.style.position = "absolute";
+    bubble.style.left = Math.random() * (window.innerWidth - 220) + "px";
+    bubble.style.top = Math.random() * (window.innerHeight - 120) + "px";
+
+    bubble.innerText = complimentList[complimentIndex];
+    container.appendChild(bubble);
+
+    complimentIndex++;
+
+    if (complimentIndex >= 30) {
+      clearInterval(interval);
+      nextBtn.style.display = "block";
+    }
+  }, 1000);
+}
+
+document.getElementById("nextToSlideshow").addEventListener("click", () => {
+  showScene(4);
+  slideIndex = 0;
+  showSlide();
+});
+
+
+/* ============================
+   SCENE 4 — GIF SLIDESHOW
 ============================ */
 
 const slides = [
@@ -272,10 +344,13 @@ function loveExplosion() {
     let x = Math.cos(angle) * dist;
     let y = Math.sin(angle) * dist;
 
-    h.animate([
-      { transform: "translate(0,0)", opacity: 1 },
-      { transform: `translate(${x}px,${y}px)`, opacity: 0 }
-    ], { duration: 2000, easing: "ease-out" });
+    h.animate(
+      [
+        { transform: "translate(0,0)", opacity: 1 },
+        { transform: `translate(${x}px,${y}px)`, opacity: 0 }
+      ],
+      { duration: 2000, easing: "ease-out" }
+    );
 
     document.body.appendChild(h);
     setTimeout(() => h.remove(), 2000);
@@ -311,8 +386,7 @@ function spawnButterfly() {
   setTimeout(() => b.remove(), 6000);
 }
 
-setInterval(spawnButterfly, 1800); // wolniejsze i ładniejsze
-
+setInterval(spawnButterfly, 1800);
 
 /* ============================
    CURSOR TRAIL
@@ -349,53 +423,6 @@ document.getElementById("scene1").addEventListener("click", (e) => {
   msg.style.pointerEvents = "none";
   document.body.appendChild(msg);
   setTimeout(() => msg.remove(), 1500);
-});
-
-
-/* ============================
-   FORTUNE MESSAGES — Scene 2
-============================ */
-
-const fortunes = [
-  "your smile is magic ✨",
-  "today will be soft and lovely 💗",
-  "you are loved more than you know 💞",
-  "good things are coming 🌸",
-  "you make the world brighter 💖"
-];
-
-document.getElementById("scene2").addEventListener("click", (e) => {
-  if (Math.random() < 0.25) {
-    const f = document.createElement("div");
-    f.innerText = fortunes[Math.floor(Math.random() * fortunes.length)];
-    f.style.position = "absolute";
-    f.style.left = e.clientX + "px";
-    f.style.top = e.clientY + "px";
-    f.style.color = "white";
-    f.style.fontSize = "18px";
-    f.style.textShadow = "0 0 10px #fff, 0 0 20px #ffb3e6";
-    f.style.pointerEvents = "none";
-    document.body.appendChild(f);
-    setTimeout(() => f.remove(), 2000);
-  }
-});
-
-/* ============================
-   SUPER LOVE MODE
-============================ */
-
-let clickTimes = [];
-
-document.addEventListener("click", () => {
-  const now = Date.now();
-  clickTimes.push(now);
-  clickTimes = clickTimes.filter(t => now - t < 400);
-
-  if (clickTimes.length >= 3) {
-    for (let i = 0; i < 40; i++) {
-      setTimeout(() => createHeart(), i * 40);
-    }
-  }
 });
 
 /* ============================
@@ -437,10 +464,13 @@ function confetti() {
     const x = Math.cos(angle) * dist;
     const y = Math.sin(angle) * dist;
 
-    c.animate([
-      { transform: "translate(0,0)", opacity: 1 },
-      { transform: `translate(${x}px,${y}px)`, opacity: 0 }
-    ], { duration: 1200 });
+    c.animate(
+      [
+        { transform: "translate(0,0)", opacity: 1 },
+        { transform: `translate(${x}px,${y}px)`, opacity: 0 }
+      ],
+      { duration: 1200 }
+    );
 
     setTimeout(() => c.remove(), 1200);
   }
