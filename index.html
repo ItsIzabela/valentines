@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>My Valentine 💝</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- MUSIC -->
-<iframe id="ytplayer" width="0" height="0" allow="autoplay; encrypted-media"></iframe>
+  <!-- MUSIC -->
+  <iframe id="ytplayer" width="0" height="0" allow="autoplay; encrypted-media"></iframe>
 
-<!-- SCENE 1 -->
-<div id="scene1" class="scene active">
-  <h1>Happy Valentine’s Day 💖</h1>
-  <h2>Who’s my Valentine?</h2>
+  <!-- SCENE 1 -->
+  <div id="scene1" class="scene active">
+    <h1>Happy Valentine’s Day 💖</h1>
+    <h2>Who’s my Valentine?</h2>
 
-  <div class="buttons">
-    <button id="no">not me duh 🙄</button>
-    <button id="yes">me :3 💕</button>
-  </div>
-</div>
-
-<!-- SCENE 2 -->
-<div id="scene2" class="scene">
-  <h1>I knew it 😌💖</h1>
-  <p>click around 💕</p>
-  <button id="hug" style="display:none; margin-top:20px;">hug me 🤗</button>
-</div>
-
-<!-- NEW SCENE 3 — COMPLIMENT WALL -->
-<div id="scene3" class="scene">
-  <div id="complimentContainer"></div>
-  <button id="nextToSlideshow">next 💞</button>
-</div>
-
-<!-- SCENE 4 — GIF SLIDESHOW -->
-<div id="scene4" class="scene">
-
-  <div id="startScreen">
+    <div class="buttons">
+      <button id="no">not me duh 🙄</button>
+      <button id="yes">me :3 💕</button>
+    </div>
   </div>
 
-  <iframe id="gif" class="gif"></iframe>
-  <div class="top-text" id="top"></div>
-  <div class="middle-text" id="text"></div>
-
-  <div id="final">
-    <h1>Us ❤️</h1>
-    <img src="us.png">
+  <!-- SCENE 2 -->
+  <div id="scene2" class="scene">
+    <h1>I knew it 😌💖</h1>
+    <p>click around 💕</p>
+    <button id="hug" style="display:none; margin-top:20px;">hug me 🤗</button>
   </div>
 
-</div>
+  <!-- NEW SCENE 3 — COMPLIMENT WALL -->
+  <div id="scene3" class="scene">
+    <div id="complimentContainer"></div>
+    <button id="nextToSlideshow">next 💞</button>
+  </div>
 
-<script src="scenes.js"></script>
+  <!-- SCENE 4 — GIF SLIDESHOW -->
+  <div id="scene4" class="scene">
+
+    <div id="startScreen">
+    </div>
+
+    <iframe id="gif" class="gif"></iframe>
+    <div class="top-text" id="top"></div>
+    <div class="middle-text" id="text"></div>
+
+    <div id="final">
+      <h1>Us ❤️</h1>
+      <img src="us.png">
+    </div>
+
+  </div>
+
+  <script src="scenes.js"></script>
 </body>
+
 </html>
