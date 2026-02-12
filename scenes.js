@@ -179,7 +179,7 @@ function startComplimentScene() {
 
         complimentIndex++;
 
-        if (complimentIndex >= 30) {
+        if (complimentIndex >= 29) {
             clearInterval(interval);
             nextBtn.style.display = "block";
         }
