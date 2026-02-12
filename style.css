@@ -1,11 +1,9 @@
-/* GLOBAL */
 body {
     margin: 0;
     overflow: hidden;
     font-family: 'Comic Sans MS', cursive;
 }
 
-/* SCENE CONTAINER */
 .scene {
     position: fixed;
     inset: 0;
@@ -18,10 +16,6 @@ body {
     opacity: 1;
     pointer-events: auto;
 }
-
-/* ============================
-   SCENA 1
-============================ */
 
 #scene1 {
     background: linear-gradient(#ffe0f0, #ff8bbf);
@@ -66,10 +60,6 @@ button:hover {
     transform: scale(1.1);
 }
 
-/* ============================
-   SCENA 2
-============================ */
-
 #scene2 {
     background: radial-gradient(circle at center, #ffdee0, #ff6f91);
     display: flex;
@@ -91,10 +81,6 @@ button:hover {
     text-shadow: 2px 2px 8px #ff7faa;
     margin-top: 20px;
 }
-
-/* ============================
-   NEW SCENE 3 — COMPLIMENT WALL
-============================ */
 
 #scene3 {
     background: black;
@@ -137,10 +123,6 @@ button:hover {
     box-shadow: 0 0 15px #ff4da6;
     animation: popIn 0.4s ease-out;
 }
-
-/* ============================
-   SCENA 4 — GIF SLIDESHOW
-============================ */
 
 #scene4 {
     background: black;
@@ -209,10 +191,6 @@ iframe.gif {
     margin-bottom: 20px;
     text-shadow: 0 0 25px #ff4da6;
 }
-
-/* ============================
-   HEARTS, SPARKLES, BUTTERFLIES
-============================ */
 
 .heart {
     position: absolute;
@@ -293,10 +271,6 @@ iframe.gif {
     }
 }
 
-/* ============================
-   CURSOR TRAIL
-============================ */
-
 .cursor-dot {
     position: fixed;
     width: 10px;
@@ -315,10 +289,6 @@ iframe.gif {
         transform: scale(0.4);
     }
 }
-
-/* ============================
-   SWEET BUBBLE
-============================ */
 
 .sweet-bubble {
     background: rgba(255, 230, 245, 0.9);
@@ -343,10 +313,6 @@ iframe.gif {
         opacity: 1;
     }
 }
-
-/* ============================
-   HUG POPUP
-============================ */
 
 .hug-popup {
     position: fixed;

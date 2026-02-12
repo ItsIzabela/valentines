@@ -1,6 +1,4 @@
-/* ============================
-   GLOBAL SCENE SYSTEM
-============================ */
+
 
 let currentScene = 1;
 
@@ -9,10 +7,6 @@ function showScene(n) {
     document.getElementById("scene" + n).classList.add("active");
     currentScene = n;
 }
-
-/* ============================
-   MUSIC — autoplay + unlock
-============================ */
 
 function startMusic() {
     const player = document.getElementById("ytplayer");
@@ -37,10 +31,6 @@ function unlockAudio() {
 }
 document.addEventListener("click", unlockAudio);
 document.addEventListener("keydown", unlockAudio);
-
-/* ============================
-   HEARTS + SPARKLES
-============================ */
 
 function createHeart() {
     const heart = document.createElement("div");
@@ -93,10 +83,6 @@ function createSparkle() {
 }
 setInterval(createSparkle, 60);
 
-/* ============================
-   SCENE 1 — BUTTON LOGIC
-============================ */
-
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
 
@@ -112,10 +98,6 @@ noBtn.addEventListener("mouseenter", () => {
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 });
-
-/* ============================
-   SCENE 2 — CLICK LOVE
-============================ */
 
 let loveClicks = 0;
 const MAX_LOVE = 13;
@@ -143,10 +125,6 @@ document.getElementById("scene2").addEventListener("click", (e) => {
         setTimeout(() => startComplimentScene(), 800);
     }
 });
-
-/* ============================
-   NEW SCENE 3 — COMPLIMENT WALL
-============================ */
 
 const complimentList = [
     "you're adorable 💗",
@@ -192,7 +170,6 @@ function startComplimentScene() {
         const bubble = document.createElement("div");
         bubble.className = "compliment-bubble";
 
-        // losowe rozmieszczenie po całym ekranie
         bubble.style.position = "absolute";
         bubble.style.left = Math.random() * (window.innerWidth - 220) + "px";
         bubble.style.top = Math.random() * (window.innerHeight - 120) + "px";
@@ -215,10 +192,6 @@ document.getElementById("nextToSlideshow").addEventListener("click", () => {
     showSlide();
 });
 
-
-/* ============================
-   SCENE 4 — GIF SLIDESHOW
-============================ */
 
 const slides = [
     { type: "text", t: `Wait a second my love… 😌💗` },
@@ -331,10 +304,6 @@ function showSlide() {
     }
 }
 
-/* ============================
-   HEART EXPLOSION
-============================ */
-
 function loveExplosion() {
     for (let k = 0; k < 120; k++) {
         let h = document.createElement("div");
@@ -360,19 +329,11 @@ function loveExplosion() {
     }
 }
 
-/* ============================
-   START SCREEN
-============================ */
-
 document.getElementById("startScreen").onclick = () => {
     document.getElementById("startScreen").style.opacity = 0;
     setTimeout(() => document.getElementById("startScreen").remove(), 900);
     showSlide();
 };
-
-/* ============================
-   BUTTERFLIES
-============================ */
 
 function spawnButterfly() {
     const b = document.createElement("div");
@@ -391,10 +352,6 @@ function spawnButterfly() {
 
 setInterval(spawnButterfly, 1800);
 
-/* ============================
-   CURSOR TRAIL
-============================ */
-
 document.addEventListener("mousemove", (e) => {
     const dot = document.createElement("div");
     dot.className = "cursor-dot";
@@ -403,10 +360,6 @@ document.addEventListener("mousemove", (e) => {
     document.body.appendChild(dot);
     setTimeout(() => dot.remove(), 600);
 });
-
-/* ============================
-   SWEET MESSAGES — Scene 1
-============================ */
 
 const sweetMessages = [
     "you're adorable 💗",
@@ -428,10 +381,6 @@ document.getElementById("scene1").addEventListener("click", (e) => {
     setTimeout(() => msg.remove(), 1500);
 });
 
-/* ============================
-   HUG BUTTON
-============================ */
-
 setTimeout(() => {
     const hug = document.getElementById("hug");
     if (hug) hug.style.display = "block";
@@ -449,10 +398,6 @@ document.getElementById("hug").addEventListener("click", () => {
 
     setTimeout(() => pop.remove(), 2000);
 });
-
-/* ============================
-   CONFETTI — Scene 1
-============================ */
 
 function confetti() {
     for (let i = 0; i < 40; i++) {
