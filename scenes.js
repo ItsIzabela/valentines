@@ -11,28 +11,21 @@ function showScene(n) {
 }
 
 /* ============================
-   MUSIC — autoplay + unlock on first click
+   MUSIC — autoplay + unlock
 ============================ */
 
 function startMusic() {
   const player = document.getElementById("ytplayer");
-
-  // Start muted (allowed by browsers)
   player.src =
     "https://www.youtube.com/embed/yKNxeF4KMsY?autoplay=1&mute=1&loop=1&playlist=yKNxeF4KMsY&enablejsapi=1";
 }
-
 startMusic();
 
-// Unlock audio on FIRST user interaction
 let audioUnlocked = false;
-
 function unlockAudio() {
   if (audioUnlocked) return;
   audioUnlocked = true;
-
   const player = document.getElementById("ytplayer");
-
   player.contentWindow.postMessage(
     JSON.stringify({
       event: "command",
@@ -42,12 +35,11 @@ function unlockAudio() {
     "*"
   );
 }
-
 document.addEventListener("click", unlockAudio);
 document.addEventListener("keydown", unlockAudio);
 
 /* ============================
-   HEARTS + SPARKLES (PASTEL)
+   HEARTS + SPARKLES
 ============================ */
 
 function createHeart() {
@@ -74,7 +66,6 @@ function createHeart() {
   animate();
   document.body.appendChild(heart);
 }
-
 setInterval(createHeart, 200);
 
 function createSparkle() {
@@ -100,7 +91,6 @@ function createSparkle() {
   animate();
   document.body.appendChild(sparkle);
 }
-
 setInterval(createSparkle, 60);
 
 /* ============================
@@ -131,6 +121,7 @@ const MAX_LOVE = 13;
 
 document.getElementById("scene2").addEventListener("click", (e) => {
   if (currentScene !== 2) return;
+  if (loveClicks >= MAX_LOVE) return; // FIX: no extra emoticons
 
   loveClicks++;
 
@@ -199,6 +190,7 @@ const final = document.getElementById("final");
 function typeWriter(str, cb) {
   text.innerHTML = "";
   text.classList.add("show");
+  text.style.textAlign = "center"; // FIX: center text
   let n = 0;
 
   let inter = setInterval(() => {
@@ -244,6 +236,7 @@ function showSlide() {
     if (s.mid) {
       text.innerText = s.mid;
       text.classList.add("show");
+      text.style.textAlign = "center"; // FIX
     }
 
     setTimeout(nextSlide, 8000);
