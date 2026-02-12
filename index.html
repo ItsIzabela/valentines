@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine 💝</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(#ffe0f0, #ff8bbf);
+      font-family: 'Comic Sans MS', cursive;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      color: white;
+      font-size: 60px;
+      text-shadow: 2px 2px 10px #ff7faa, 0 0 25px #fff;
+      margin: 0;
+    }
+
+    h2 {
+      color: #fff;
+      font-size: 36px;
+      text-shadow: 2px 2px 10px #ff7faa, 0 0 15px #fff;
+      margin: 10px 0 30px 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 30px;
+      z-index: 10;
+      position: relative;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: linear-gradient(#ff9dc8, #ff3d92);
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      position: relative;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(255, 0, 0, 0.9);
+      clip-path: polygon(
+        50% 90%, 62% 78%, 75% 65%, 88% 48%, 90% 32%, 80% 18%,
+        65% 12%, 50% 18%, 35% 12%, 20% 18%, 10% 32%, 12% 48%,
+        25% 65%, 38% 78%
+      );
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: radial-gradient(circle, #fff 0%, #fff 70%);
+      border-radius: 50%;
+      opacity: 0.8;
+      z-index: 3;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Happy Valentine’s Day 💖</h1>
+<h2>Who’s my Valentine?</h2>
+
+<div class="buttons">
+  <button id="no">not me duh 🙄</button>
+  <button id="yes">me :3 💕</button>
+</div>
+
+<script>
+/* ===== Floating Hearts ===== */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  const size = 15 + Math.random() * 25;
+  heart.style.width = heart.style.height = size + "px";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.top = "-50px";
+  heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+  const duration = 4000 + Math.random() * 4000;
+  const start = Date.now();
+
+  function animate() {
+    const time = Date.now() - start;
+    const progress = time / duration;
+    heart.style.top = progress * window.innerHeight + "px";
+    heart.style.opacity = 1 - progress;
+    if (progress < 1) requestAnimationFrame(animate);
+    else heart.remove();
+  }
+  animate();
+  document.body.appendChild(heart);
+}
+setInterval(createHeart, 200);
+
+/* ===== Sparkles ===== */
+function createSparkle() {
+  const sparkle = document.createElement("div");
+  sparkle.classList.add("sparkle");
+  const size = 2 + Math.random() * 5;
+  sparkle.style.width = sparkle.style.height = size + "px";
+  sparkle.style.left = Math.random() * window.innerWidth + "px";
+  sparkle.style.top = Math.random() * window.innerHeight + "px";
+  const duration = 800 + Math.random() * 800;
+  const start = Date.now();
+
+  function animate() {
+    const time = Date.now() - start;
+    const progress = time / duration;
+    sparkle.style.transform = `translateY(${progress*-30}px) translateX(${Math.sin(progress*10)*6}px) scale(${1-progress})`;
+    sparkle.style.opacity = 1 - progress;
+    if (progress < 1) requestAnimationFrame(animate);
+    else sparkle.remove();
+  }
+  animate();
+  document.body.appendChild(sparkle);
+}
+setInterval(createSparkle, 50);
+
+/* ===== Button Logic ===== */
+let clicks = 0;
+const MAX_CLICKS = 7;
+
+/* "me :3" button - just go to love page */
+document.getElementById("yes").addEventListener("click", () => {
+  window.location.href = "love.html";
+});
+
+
+/* "not me duh" button - moves randomly */
+const noBtn = document.getElementById("no");
+noBtn.addEventListener("mouseenter", () => {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  noBtn.style.position = "absolute";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+</script>
+
+</body>
+</html>
