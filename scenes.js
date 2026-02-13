@@ -155,8 +155,78 @@ const complimentList = [
     "you’re love itself 💕",
     "you’re my safe place 💖",
     "you’re the best thing ever ✨",
-    "you’re my forever favorite 💞"
+    "you’re my forever favorite 💞",
+    "you make my days brighter 🌷",
+    "you’re the softest kind of wonderful 💗",
+    "you make my heart smile 💞",
+    "you’re pure comfort to me 🌸",
+    "you’re the sweetest part of my life 🍯",
+    "you’re my favorite feeling 💖",
+    "you’re effortlessly lovable ✨",
+    "you make everything feel lighter 💗",
+    "you’re my gentle joy 🌼",
+    "you’re the warmest presence 💞",
+    "you’re my little piece of peace 🌙",
+    "you’re sweeter than springtime 🌸",
+    "you’re my cozy place 💕",
+    "you’re the cutest thought in my mind 💗",
+    "you make the world feel softer ✨",
+    "you’re my favorite kind of magic 💖",
+    "you’re the loveliest human 🌷",
+    "you’re my heart’s calm 💞",
+    "you’re impossibly sweet 🍓",
+    "you’re my everyday miracle ✨",
+    "you’re the softest smile in my life 💗",
+    "you make ordinary moments special 💞",
+    "you’re my sweetest comfort 🌸",
+    "you’re my favorite hello 💕",
+    "you’re the calm in my chaos 💖",
+    "you’re my sweetest thought ✨",
+    "you’re the cutest blessing 💗",
+    "you’re my gentle sunshine 🌼",
+    "you’re my heart’s softest place 💞",
+    "you’re sweeter than honey 🍯",
+    "you’re my warmest memory 💖",
+    "you’re the cutest spark ✨",
+    "you’re my softest joy 💗",
+    "you’re my favorite softness 🌸",
+    "you’re my sweetest peace 💞",
+    "you’re the warmest light 💕",
+    "you’re my heart’s sunshine ☀️",
+    "you’re my sweetest comfort 💖",
+    "you’re the cutest part of my day ✨",
+    "you’re my gentle warmth 💗",
+    "you’re my favorite person to think about 🌷",
+    "you’re my softest smile 💞",
+    "you’re sweeter than a summer breeze 🌸",
+    "you’re my heart’s little treasure 💕",
+    "you’re my favorite kind of quiet joy 💖",
+    "you’re the cutest soul ✨",
+    "you’re my warmest thought 💗",
+    "you’re my sweetest little miracle 🌼",
+    "you’re my heart’s soft glow 💞",
+    "you’re the cutest comfort 💕",
+    "you’re my favorite kind of peace 💖",
+    "you’re my softest dream ✨",
+    "you’re my sweetest warmth 💗",
+    "you’re my gentle little star 🌙",
+    "you’re my heart’s sweetest sound 💞",
+    "you’re the cutest warmth 🌸",
+    "you’re my favorite softness in the world 💕",
+    "you’re my sweetest light 💖",
+    "you’re my softest happiness ✨",
+    "you’re my heart’s favorite comfort 💗",
+    "you’re my sweetest little joy 🌷",
+    "you’re the cutest sparkle 💞",
+    "you’re my warmest smile 💕",
+    "you’re my favorite gentle feeling 💖",
+    "you’re my softest sunshine ✨",
+    "you’re my sweetest little blessing 💗",
+    "you’re my heart’s warmest place 🌸",
+    "you’re the cutest joy 💞",
+    "you’re my favorite soft moment 💕"
 ];
+
 
 let complimentIndex = 0;
 
@@ -179,7 +249,7 @@ function startComplimentScene() {
 
         complimentIndex++;
 
-        if (complimentIndex >= 29) {
+        if (complimentIndex >= 99) {
             clearInterval(interval);
             nextBtn.style.display = "block";
         }
