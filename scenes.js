@@ -253,7 +253,7 @@ function startComplimentScene() {
             clearInterval(interval);
             nextBtn.style.display = "block";
         }
-    }, 1000);
+    }, 2000);
 }
 
 document.getElementById("nextToSlideshow").addEventListener("click", () => {
